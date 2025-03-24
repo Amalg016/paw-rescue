@@ -7,7 +7,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
 app.use(express.json());
 const DATA_FILE = "data/data.json"
 
@@ -77,10 +76,76 @@ app.patch('/api/dogs/:id', (req, res) => {
     res.json(data[dogs][index]);
 });
 
+app.get("/api/approvals/:id", (req, res) => {
+    const { id: userId } = req.params;
+    let data = readData();
+    let user = data.users.find((item) => item.id == userId);
+    console.log(user);
+    if (user) {
+        if (user.isAdmin) {
+            let dogIds = data.dogs.filter((dog) => dog.shelter == user.shelter).map((dog) => dog.id);
+            let approvals = data.approvals.filter((approval) => dogIds.includes(approval.dogId)).map((approval) => {
+                approval.dog = data.dogs.find((dog) => dog.id == approval.dogId)
+                delete approval["dogId"];
+                return approval;
+            });
+            res.json(approvals);
+        }
+        else {
+            let approvals = data.approvals.filter((approval) => approval.userId == userId).map((approval) => {
+                approval.dog = data.dogs.find((dog) => dog.id == approval.dogId)
+                delete approval["dogId"];
+                return approval;
+            });
+            res.json(approvals);
+        }
+    }
+    res.status(404).json({ error: "User Not found" })
+});
 
+app.post("/api/approvals", (req, res) => {
+    const { id, dogId } = req.body;
+    let data = readData();
+    let approval = { userId: id, dogId, status: false };
 
-app.get("/api/requests/:id", (req, res) => {
+    data.approvals.push(approval);
+    writeData(data);
+    res.json(approval);
+});
+
+app.patch("/api/approvals/:id", (req, res) => {
     const { id } = req.params;
+    const { dogId, userId, status } = req.body;
+    let data = readData();
+
+    let user = data.users.find((item) => item.id == id);
+    if (user) {
+        if (user.isAdmin) {
+            let index = data.approvals.findIndex((approval) => approval.userId == userId && approval.dogId == dogId);
+            data.approvals[index] = { ...data.approvals[index], status };
+            writeData(data);
+            res.json(data);
+        }
+    }
+    res.status(404).json({ error: "user Not found" })
+
+});
+
+app.post('/api/signin', (req, res) => {
+    const { username, password } = req.body;
+    let data = readData();
+    let filteredUser = data.users.find((user) =>
+        user.name == username && user.password == password
+    );
+
+    if (filteredUser) {
+        const { password: pass, shelter, ...datatoUpdate } = filteredUser;
+        if (datatoUpdate.isAdmin) {
+            res.status(200).json({ ...datatoUpdate, shelter });
+        }
+        res.status(200).json(datatoUpdate);
+    }
+    res.status(404).json({ error: "username or password" });
 });
 
 app.listen(8080, () => {
