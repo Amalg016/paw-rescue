@@ -1,0 +1,18 @@
+{
+  "dogs": [
+    {
+      "name": "arjun e",
+      "age": "2 yr",
+      "breed": "German Sheperd",
+      "id": 1,
+      "shelter": "Dog House 1"
+    },
+    {
+      "name": "tommy",
+      "age": "5 months",
+      "breed": "Doberman",
+      "id": 2,
+      "shelter": "Dog House 2"
+    }
+  ]
+}
