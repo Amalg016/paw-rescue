@@ -1,0 +1,86 @@
+.staffPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-between; */
+    height: 100vh;
+    width: 100vw;
+}
+
+.dog-list {
+    padding: 20px;
+    width: 100vw;
+    margin: 0 auto;
+  }
+  
+  .dogs-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .dog-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .dog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  .dog-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .dog-info {
+    padding: 15px;
+  }
+  
+  .dog-info h2 {
+    margin: 0 0 10px 0;
+    color: #333;
+  }
+  
+  .dog-info p {
+    margin: 5px 0;
+    color: #666;
+  }
+
+
+  .adopt-btn{
+    /* background-color: #666; */
+    padding: 5px 10px;
+    margin: 0 10px;
+    cursor: pointer;
+    color: #ddd;
+  }
+
+  /** Dog form */
+
+
+  .dogForm{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 20px 0 0 20px;
+  }
+
+  .dogForm input,
+  .dogForm button {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 50%;
+  }
+
+  .dogForm .form-group{
+    display: flex;
+    flex-direction: column;
+  }

@@ -1,0 +1,46 @@
+.approvalsTable {
+    margin: 10px;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Table header styling */
+.approvalsTable th {
+    background-color: #4b4e4b;
+    color: #333;
+    text-align: left;
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Table row styling */
+.approvalsTable td {
+    padding: 10px;
+    border: 1px solid #4b4e4b;
+    text-align: left;
+    color: #4b4e4b;
+}
+
+/* Alternate row background color */
+.approvalsTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover effect for rows */
+.approvalsTable tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Checkbox styling */
+.approvalsTable input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+/* Table header row styling */
+.approvalsTable thead tr {
+    border-bottom: 2px solid #ddd;
+}

@@ -1,0 +1,65 @@
+.navbar {
+    background-color: #fff;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100vw;
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    max-width: 1500px;
+    width: 100%;
+    padding: 0 24px;
+  }
+  
+  .navbar-logo {
+    color: #333;
+    justify-self: start;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-item {
+    height: 80px;
+  }
+  
+  .nav-links {
+    color: #333;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0 1rem;
+    height: 100%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .nav-links:hover {
+    color: #ff6b6b;
+    border-bottom: 3px solid #ff6b6b;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .nav-menu {
+      display: none;
+    }
+    
+    /* You would add mobile menu toggle functionality here */
+  }

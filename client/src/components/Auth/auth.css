@@ -1,0 +1,21 @@
+
+.authForm{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 20px 0 0 20px;
+  }
+
+  .authForm input,
+  .authForm button {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 50%;
+  }
+
+  .authForm .form-group{
+    display: flex;
+    flex-direction: column;
+  }

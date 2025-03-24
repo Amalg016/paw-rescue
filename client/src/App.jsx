@@ -1,53 +1,69 @@
-import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import axios from "axios";
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import StaffPage from './components/Staff';
+import UserPage from './components/User';
+import NotFound from './components/NotFound';
+import StaffDogList from './components/Staff/DogList';
+
+import DogForm from './components/Staff/DogForm';
+import SignIn from './components/Auth/SignIn';
+import DogApprovals from './components/Staff/DogApprovals';
+
+window.alert = (message) => {
+  let toast = document.getElementById("toast");
+  toast.classList.add("show");
+  toast.innerHTML = message;
+  setTimeout(() => {
+    toast.classList.remove("show");
+    toast.innerHTML = '';
+  }, 3000); // Hide after 3 seconds
+}
+
+function AuthGuard({ children }){
+  const { isAdmin } = JSON.parse(localStorage.getItem("userDetails")) || {};
+  const isAuthenticated = isAdmin;
+
+    if (!isAuthenticated) {
+      // Redirect to the sign-in page if not authenticated
+      return <Navigate to="/signin" replace />;
+  }
+
+  // Render the children if authenticated
+  return children;
+  }
+
+
+function UserAuthGuard({ children }){
+  const { isAdmin, id } = JSON.parse(localStorage.getItem("userDetails")) || {};
+  const isAuthenticated = !isAdmin && !!id;
+
+    if (!isAuthenticated) {
+      // Redirect to the sign-in page if not authenticated
+      return <Navigate to="/signin" replace />;
+  }
+
+  // Render the children if authenticated
+  return children;
+  }
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [array, setArray] = useState([]);
+  // const [count, setCount] = useState(0);
 
-  const fetchAPI = async () => {
-    const response = await axios.get("http://localhost:8080/api");
-    setArray(response.data.fruits);
-    console.log(response.data.fruits);
-  };
-
-  useEffect(() => {
-    fetchAPI();
-  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-        {array.map((fruit, index) => (
-          <div key={index}>
-            <p>{fruit}</p>
-            <br></br>
-          </div>
-        ))}
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Routes>
+      <Route path="/" element={<StaffPage />} />
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/staff" element={<AuthGuard><StaffPage /></AuthGuard>} />
+      <Route path="/staff/dogs" element={<StaffDogList />} />
+      <Route path="/staff/dogs/add" element={<AuthGuard><DogForm /></AuthGuard>} />
+      <Route path="/staff/dogs/edit/:dogId" element={<AuthGuard><DogForm /></AuthGuard>} />
+      <Route path="/staff/approvals" element={<AuthGuard><DogApprovals /></AuthGuard>} />
+      <Route path="/staff/volunteer" element={<AuthGuard><StaffPage /></AuthGuard>} />
+      <Route path="/user" element={<UserAuthGuard><UserPage /></UserAuthGuard>} />
+      <Route path="*" element={<NotFound />} /> 
+    </Routes>
   );
 }
 
 export default App;
+
