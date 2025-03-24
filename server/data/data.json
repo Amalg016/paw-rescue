@@ -1,18 +1,66 @@
 {
   "dogs": [
     {
-      "name": "arjun e",
-      "age": "2 yr",
-      "breed": "German Sheperd",
       "id": 1,
-      "shelter": "Dog House 1"
+      "name": "Max",
+      "age": 3,
+      "breed": "Border Collie",
+      "shelter": "Happy Paws",
+      "imageUrl": "https://images.pexels.com/photos/27174969/pexels-photo-27174969/free-photo-of-portrait-of-border-collie.jpeg"
     },
     {
-      "name": "tommy",
-      "age": "5 months",
-      "breed": "Doberman",
       "id": 2,
-      "shelter": "Dog House 2"
+      "name": "Bella",
+      "age": 5,
+      "breed": "Pembroke Welsh Corgi",
+      "shelter": "Safe Haven",
+      "imageUrl": "https://images.pexels.com/photos/164186/pexels-photo-164186.jpeg"
+    },
+    {
+      "id": 3,
+      "name": "Charlie",
+      "age": 2,
+      "breed": "Golden Retriever",
+      "shelter": "Happy Paws",
+      "imageUrl": "https://images.pexels.com/photos/1490908/pexels-photo-1490908.jpeg"
+    },
+    {
+      "id": 4,
+      "name": "Luna",
+      "age": 4,
+      "breed": "Siberian Husky",
+      "shelter": "Furry Friends",
+      "imageUrl": "https://images.pexels.com/photos/3715583/pexels-photo-3715583.jpeg"
+    },
+    {
+      "id": 5,
+      "name": "Rocky",
+      "age": 7,
+      "breed": "Siberian Husky",
+      "shelter": "Safe Haven",
+      "imageUrl": "https://images.pexels.com/photos/3640877/pexels-photo-3640877.jpeg"
+    },
+    {
+      "id": 6,
+      "name": "Daisy",
+      "age": 1,
+      "breed": "German Shepherd",
+      "shelter": "Furry Friends",
+      "imageUrl": "https://images.pexels.com/photos/342214/pexels-photo-342214.jpeg"
+    },
+    {
+      "id": 7,
+      "name": "Buddy",
+      "age": 4,
+      "breed": "Poodle",
+      "shelter": "Safe Haven",
+      "imageUrl": "https://placedog.net/500/300?id=7"
+    }
+  ],
+  "users": [
+    {
+      "name": "amal",
+      "id": 1
     }
   ]
 }

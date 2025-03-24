@@ -34,6 +34,19 @@ app.get('/api/dogs', (req, res) => {
     res.json(data.dogs);
 });
 
+app.get('/api/dogs/:id', (req, res) => {
+    const { id } = req.params;
+    const data = readData().dogs;
+    if (data != null && data.length > 0) {
+        const index = data.findIndex((dog) => dog.id == id);
+        if (index === -1) {
+            return res.status(404).json({ error: 'Dog not found.' });
+        }
+        res.json(data[index]);
+    }
+    res.json({ error: "No Data found" });
+});
+
 app.post('/api/dogs', (req, res) => {
     const newDog = req.body;
     if (!newDog.name || !newDog.breed) {
@@ -62,6 +75,12 @@ app.patch('/api/dogs/:id', (req, res) => {
     writeData(data);
 
     res.json(data[dogs][index]);
+});
+
+
+
+app.get("/api/requests/:id", (req, res) => {
+    const { id } = req.params;
 });
 
 app.listen(8080, () => {
