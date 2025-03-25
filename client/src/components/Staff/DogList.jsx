@@ -88,7 +88,7 @@ export default function StaffDogList() {
 
                         
                         </div>
-                        
+                   
                     </Link>
                         {isClientUser && (!id ? <span style={{ backgroundColor: '#666' }} className="adopt-btn" onClick={(e) => handleAdopt(dog, index, e)}>Adopt</span> : <span className="adopt-btn" style={{ color: isAdopted ? 'green' : 'orange' }}>{statusText}</span>)}
                     </div>
@@ -96,7 +96,8 @@ export default function StaffDogList() {
                     )})}
                 </div>
             </div>
-            <AddButton />
+            {isClientUser? null : <AddButton />}
+            
         </div>
     );
 }

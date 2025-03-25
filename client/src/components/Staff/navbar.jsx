@@ -4,8 +4,9 @@ import './navbar.css'; // Optional styling
 
 const Navbar = () => {
     const [ dummy, setDummy ] = useState(0);
-    const { id } = JSON.parse(localStorage.getItem("userDetails")) || {};
-
+    
+    const { isAdmin, id } = JSON.parse(localStorage.getItem("userDetails")) || {};
+    const isClientUser = !isAdmin && !!id;
 
   return (
     <nav className="navbar">
@@ -20,11 +21,14 @@ const Navbar = () => {
               List Dogs
             </Link>
           </li>
-          <li className="nav-item">
+          {isClientUser ? null :
+            <li className="nav-item">
             <Link to="/staff/approvals" className="nav-links">
               Approvals
             </Link>
           </li>
+          }
+          
           {/* <li className="nav-item">
             <Link to="/staff/volunteer" className="nav-links">
               Volunteer
