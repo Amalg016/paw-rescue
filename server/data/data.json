@@ -5,7 +5,7 @@
       "name": "Max",
       "age": 3,
       "breed": "Border Collie",
-      "shelter": "Happy Paws",
+      "shelter": "Safe Haven",
       "imageUrl": "https://images.pexels.com/photos/27174969/pexels-photo-27174969/free-photo-of-portrait-of-border-collie.jpeg"
     },
     {
@@ -21,7 +21,7 @@
       "name": "Charlie",
       "age": 2,
       "breed": "Golden Retriever",
-      "shelter": "Happy Paws",
+      "shelter": "Safe Haven",
       "imageUrl": "https://images.pexels.com/photos/1490908/pexels-photo-1490908.jpeg"
     },
     {
@@ -45,22 +45,97 @@
       "name": "Daisy",
       "age": 1,
       "breed": "German Shepherd",
-      "shelter": "Furry Friends",
+      "shelter": "Safe Haven",
       "imageUrl": "https://images.pexels.com/photos/342214/pexels-photo-342214.jpeg"
     },
     {
       "id": 7,
-      "name": "Buddy",
+      "name": "Buddy edited again",
       "age": 4,
       "breed": "Poodle",
       "shelter": "Safe Haven",
       "imageUrl": "https://placedog.net/500/300?id=7"
+    },
+    {
+      "name": "pupp",
+      "age": "11",
+      "breed": "noo",
+      "imageUrl": "sdjhgfjhdsfds",
+      "shelter": "Safe Haven",
+      "id": 8
+    },
+    {
+      "name": "Sunu",
+      "age": "19",
+      "breed": "human",
+      "imageUrl": "sdjhfgjshdgfjdsf",
+      "shelter": "Safe Haven",
+      "id": 9
+    },
+    {
+      "name": "amal",
+      "age": "29",
+      "breed": "huan",
+      "imageUrl": "syudfuygfdsf",
+      "shelter": "Safe Haven",
+      "id": 10
     }
   ],
   "users": [
     {
-      "name": "amal",
-      "id": 1
+      "name": "luffy",
+      "id": 1,
+      "password": "1234",
+      "isAdmin": true,
+      "shelter": "Safe Haven"
+    },
+    {
+      "name": "zoro",
+      "id": 2,
+      "password": "1234",
+      "isAdmin": false
+    }
+  ],
+  "approvals": [
+    {
+      "dogId": 7,
+      "userId": 2,
+      "status": true
+    },
+    {
+      "dogId": 8,
+      "userId": 2,
+      "status": true
+    },
+    {
+      "userId": 2,
+      "dogId": 2,
+      "status": true
+    },
+    {
+      "userId": 2,
+      "dogId": 3,
+      "status": true
+    },
+    {
+      "userId": 2,
+      "dogId": 4,
+      "status": false
+    },
+    {
+      "userId": 2,
+      "dogId": 5,
+      "status": true
+    },
+    {
+      "userId": 2,
+      "dogId": 6,
+      "status": false
+    },
+    {
+      "userId": 2,
+      "dogId": 1,
+      "status": false
     }
   ]
 }
