@@ -1,12 +1,6 @@
 const express = require("express");
 const app = express();
 const fs = require('fs');
-const cors = require("cors");
-const corsOptions = {
-    origin: ["http://localhost:5173"],
-};
-
-app.use(cors(corsOptions));
 app.use(express.json());
 const DATA_FILE = "data/data.json"
 
@@ -148,6 +142,6 @@ app.post('/api/signin', (req, res) => {
     res.status(404).json({ error: "username or password" });
 });
 
-app.listen(8080, () => {
+app.listen(5000, () => {
     console.log("Server started on port 8080");
 });

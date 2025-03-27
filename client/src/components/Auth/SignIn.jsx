@@ -2,9 +2,12 @@ import React, { useState } from "react";
 
 import './auth.css';
 import axios from "axios";
-import { BASE_URL } from "../../constants/api";
 import { useNavigate } from "react-router-dom";
 
+// For development (if not using Docker)
+const devAPI = axios.create({
+    baseURL: '/api', // Let Nginx handle the proxy
+});
 const SignIn = () => {
     const [userDetails, setUserDetails] = useState({
         username: "",
@@ -18,18 +21,18 @@ const SignIn = () => {
         const { name, value } = e.target;
         setUserDetails({
             ...userDetails,
-            [name]: value, 
+            [name]: value,
         });
     }
 
     const handleSignin = async () => {
         try {
-            const response = await axios.post(`${BASE_URL}signin`, userDetails);
+            const response = await devAPI.post(`/signin`, userDetails);
             alert("User signed in successfully!");
 
             localStorage.setItem("userDetails", JSON.stringify(response.data));
 
-            navigate("/"); 
+            navigate("/");
 
         } catch (error) {
             console.error("Error authentication:", error);
@@ -42,7 +45,7 @@ const SignIn = () => {
 
             <div className="authForm">
 
-            <div className="form-group">
+                <div className="form-group">
                     <label>Username</label>
                     <input type="text" name="username" placeholder="Username" onChange={handleFormChange} />
                 </div>

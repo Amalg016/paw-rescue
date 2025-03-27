@@ -1,7 +1,10 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { BASE_URL } from "../../constants/api";
 
+// For development (if not using Docker)
+const devAPI = axios.create({
+    baseURL: '/api', // Let Nginx handle the proxy
+});
 import './dogApprovals.css';
 
 const DogApprovals = () => {
@@ -9,13 +12,13 @@ const DogApprovals = () => {
     const [approvalsList, setApprovalsList] = useState([]);
 
     useEffect(() => {
-        if(!id) return;
+        if (!id) return;
 
         const fetchApprovalsList = async () => {
-            try{
-                const response = await axios.get(`${BASE_URL}approvals/${id}`);
+            try {
+                const response = await devAPI.get(`/approvals/${id}`);
                 setApprovalsList(response.data);
-            }catch(error){
+            } catch (error) {
                 console.error("Error fetching approvals:", error);
                 alert("Failed to get approval list.");
             }
@@ -31,7 +34,7 @@ const DogApprovals = () => {
 
         const newStatus = true;
         try {
-            const response = await axios.patch(`${BASE_URL}approvals/${id}`, { userId, dogId, status: newStatus });
+            const response = await devAPI.patch(`/approvals/${id}`, { userId, dogId, status: newStatus });
             alert("Approval status updated successfully!");
             console.log(response.data);
 
@@ -50,35 +53,36 @@ const DogApprovals = () => {
         <div className="staffPage">
             <h1>Approvals</h1>
 
-<div style={{ width: '50%' }}>
+            <div style={{ width: '50%' }}>
 
-            <table className="approvalsTable">
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Action</th>
-            </tr>
-
-            {approvalsList.map((approvalItem, index) => {
-                const { dog, status  } = approvalItem;
-                const { name } = dog || {};
-                return (
-                    <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>{name}</td>
-                        <td>
-                            {!status ? <input 
-                                type="checkbox"
-                                checked={!!status}
-                                onChange={() => handleToggle(index)}
-                             /> : <span style={{ color: 'green' }}>Already approved</span>}
-                        </td>
+                <table className="approvalsTable">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Action</th>
                     </tr>
-            )})}
-        </table>
-        </div>
 
-       </div>
+                    {approvalsList.map((approvalItem, index) => {
+                        const { dog, status } = approvalItem;
+                        const { name } = dog || {};
+                        return (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{name}</td>
+                                <td>
+                                    {!status ? <input
+                                        type="checkbox"
+                                        checked={!!status}
+                                        onChange={() => handleToggle(index)}
+                                    /> : <span style={{ color: 'green' }}>Already approved</span>}
+                                </td>
+                            </tr>
+                        )
+                    })}
+                </table>
+            </div>
+
+        </div>
     )
 }
 

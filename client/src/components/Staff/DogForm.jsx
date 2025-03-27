@@ -3,14 +3,17 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import Navbar from "./navbar";
 import axios from "axios";
-import { BASE_URL } from "../../constants/api";
 
+// For development (if not using Docker)
+const devAPI = axios.create({
+    baseURL: '/api', // Let Nginx handle the proxy
+});
 
 const DogForm = () => {
     const { dogId } = useParams(); // Access the dynamic parameter
     const navigate = useNavigate(); // Initialize useNavigate
 
-    
+
     const [dogForm, setDogForm] = useState({
         name: "",
         age: "",
@@ -26,12 +29,12 @@ const DogForm = () => {
         });
     }
 
-    const handleAdd = async(formData) => {
+    const handleAdd = async (formData) => {
         try {
-            const response = await axios.post(`${BASE_URL}dogs`, formData);
+            const response = await devAPI.post(`/dogs`, formData);
             alert("Dog added successfully!");
             console.log(response.data);
-            navigate("/staff/dogs"); 
+            navigate("/staff/dogs");
 
         } catch (error) {
             console.error("Error adding dog:", error);
@@ -41,9 +44,9 @@ const DogForm = () => {
 
     const handleUpdate = async (formData, dogId) => {
         try {
-            const response = await axios.patch(`${BASE_URL}dogs/${dogId}`, formData);
+            const response = await devAPI.patch(`/dogs/${dogId}`, formData);
             alert("Dog updated successfully!");
-            navigate("/staff/dogs"); 
+            navigate("/staff/dogs");
             console.log(response.data);
         } catch (error) {
             console.error("Error updating dog:", error);
@@ -63,13 +66,13 @@ const DogForm = () => {
     }
 
     useEffect(() => {
-        if(!dogId) return;
+        if (!dogId) return;
 
         const fetchDogDetailsById = async (dogId) => {
-            try{
-                const response = await axios.get(`${BASE_URL}dogs/${dogId}`);
+            try {
+                const response = await devAPI.get(`/dogs/${dogId}`);
                 setDogForm(response.data);
-            }catch(error){
+            } catch (error) {
                 console.error("Error updating dog:", error);
                 alert("Failed to get dog.");
             }
@@ -81,7 +84,7 @@ const DogForm = () => {
 
     return (
         <div className="staffPage">
-            <Navbar/>
+            <Navbar />
             <div className="dogForm">
 
                 <div className="form-group">
@@ -90,23 +93,23 @@ const DogForm = () => {
                 </div>
 
                 <div className="form-group">
-                <label>Age</label>
-                <input type="text" name="age" placeholder="Age" value={dogForm.age} onChange={handleFormChange} />
+                    <label>Age</label>
+                    <input type="text" name="age" placeholder="Age" value={dogForm.age} onChange={handleFormChange} />
                 </div>
 
                 <div className="form-group">
-                <label>Breed</label>
-                <input type="text" name="breed" placeholder="Breed" value={dogForm.breed} onChange={handleFormChange} />
+                    <label>Breed</label>
+                    <input type="text" name="breed" placeholder="Breed" value={dogForm.breed} onChange={handleFormChange} />
                 </div>
 
                 <div className="form-group">
-                <label>Image URL</label>
-                <input type="text" name="imageUrl" placeholder="Image URL" value={dogForm.imageUrl} onChange={handleFormChange} />
+                    <label>Image URL</label>
+                    <input type="text" name="imageUrl" placeholder="Image URL" value={dogForm.imageUrl} onChange={handleFormChange} />
                 </div>
 
                 <button onClick={handleFormSubmit}>{`${dogId ? 'Update' : 'Add'}`} Dog</button>
+            </div>
         </div>
-       </div>
     )
 }
 
